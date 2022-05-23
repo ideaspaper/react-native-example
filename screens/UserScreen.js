@@ -24,14 +24,12 @@ const UserScreen = ({ route }) => {
 
   useFocusEffect(
     useCallback(() => {
-      console.log('UserScreen Focus');
       dispatch(fetchUser(userEmail)).catch(() => {
         setAlertMessage('Oops something wrong happened');
         setAlertStatus('error');
         setAlertShow(true);
       });
       return () => {
-        console.log('UserScreen Blur');
         dispatch(setUserLoading(true));
         dispatch(setUserError(null));
         dispatch(setUser({}));
