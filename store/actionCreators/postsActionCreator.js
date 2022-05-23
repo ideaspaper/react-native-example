@@ -14,8 +14,6 @@ export const setPostsLoading = (payload) => {
 
 export const fetchPosts = () => {
   return (dispatch, getState) => {
-    dispatch(setPostsError(null));
-    dispatch(setPostsLoading(true));
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => {
         if (!response.ok) throw new Error('cannot fetch posts');

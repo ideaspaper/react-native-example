@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PostsScreen from '../screens/PostsScreen';
-import UsersScreen from '../screens/UsersScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import UsersStack from './UsersStack';
 
 const AppTab = () => {
   const Tab = createBottomTabNavigator();
@@ -12,7 +12,7 @@ const AppTab = () => {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             switch (route.name) {
-              case 'Users':
+              case 'UsersStack':
                 iconName = focused ? 'people' : 'people-outline';
                 break;
               case 'Posts':
@@ -26,7 +26,7 @@ const AppTab = () => {
         };
       }}
     >
-      <Tab.Screen name="Users" component={UsersScreen} />
+      <Tab.Screen name="UsersStack" component={UsersStack} options={{ title: 'Users' }} />
       <Tab.Screen name="Posts" component={PostsScreen} />
     </Tab.Navigator>
   );

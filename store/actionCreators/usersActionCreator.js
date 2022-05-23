@@ -14,21 +14,23 @@ export const setUsersLoading = (payload) => {
 
 export const fetchUsers = () => {
   return (dispatch, getState) => {
-    dispatch(setUsersError(null));
-    dispatch(setUsersLoading(true));
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => {
-        if (!response.ok) throw new Error('cannot fetch users');
-        return response.json();
-      })
-      .then((data) => {
-        dispatch(setUsers(data));
-      })
-      .catch((error) => {
-        dispatch(setUsersError(error.message));
-      })
-      .finally(() => {
-        dispatch(setUsersLoading(false));
-      });
+    return new Promise((resolve, reject) => {
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then((response) => {
+          if (!response.ok) throw new Error('cannot fetch users');
+          return response.json();
+        })
+        .then((data) => {
+          dispatch(setUsers(data));
+          resolve();
+        })
+        .catch((error) => {
+          dispatch(setUsersError(error.message));
+          reject();
+        })
+        .finally(() => {
+          dispatch(setUsersLoading(false));
+        });
+    });
   };
 };
