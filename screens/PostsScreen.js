@@ -1,5 +1,5 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { Text, FlatList } from 'native-base';
+import { FlatList } from 'native-base';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,6 +10,7 @@ import {
 } from '../store/actionCreators/postsActionCreator';
 import PostCard from '../components/PostCard';
 import SpinnerPage from '../components/SpinnerPage';
+import ErrorPage from '../components/ErrorPage';
 
 const PostsScreen = () => {
   const { posts, postsError, postsLoading } = useSelector((state) => state.postsReducer);
@@ -33,7 +34,7 @@ const PostsScreen = () => {
   return (
     <>
       {postsLoading && <SpinnerPage loadingText="fetching posts" />}
-      {!postsLoading && postsError && <Text>{postsError}</Text>}
+      {!postsLoading && postsError && <ErrorPage />}
       {!postsLoading && !postsError && (
         <FlatList
           padding="4"

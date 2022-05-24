@@ -27,7 +27,7 @@ const UsersScreen = () => {
   useFocusEffect(
     useCallback(() => {
       dispatch(fetchUsers()).catch(() => {
-        setAlertMessage(usersError);
+        setAlertMessage('Oops something wrong happened');
         setAlertStatus('error');
         setAlertShow(true);
       });
@@ -51,7 +51,7 @@ const UsersScreen = () => {
         />
       )}
       {usersLoading && <SpinnerPage loadingText="fetching users" />}
-      {!usersLoading && usersError && <ErrorPage />}
+      {!usersLoading && usersError && <ErrorPage errorMessage={usersError} />}
       {!usersLoading && !usersError && (
         <FlatList
           p="4"
